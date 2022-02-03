@@ -89,20 +89,28 @@ export type UIBuilds = null | {
   pipelines: UIBuildPipeline[];
 };
 
+export type UIBranchStats = {
+  branches: {
+    name: string;
+    url: string;
+    lastCommitDate: Date;
+  }[];
+  count: number;
+  limit: number;
+};
+
 export type UIBranches = {
-  total: number;
-  active: number;
-  abandoned: number;
-  deleteCandidates: number;
-  possiblyConflicting: number;
+  total: UIBranchStats;
+  active: UIBranchStats;
+  abandoned: UIBranchStats;
+  deleteCandidates: UIBranchStats;
+  possiblyConflicting: UIBranchStats;
   significantlyAhead: {
+    count: number;
     limit: number;
-    branches: {
-      name: string;
-      url: string;
+    branches: (UIBranchStats['branches'][0] & {
       aheadBy: number;
-      lastCommitDate: Date;
-    }[];
+    })[];
   };
 };
 

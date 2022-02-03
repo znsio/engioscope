@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TabContents: React.FC<{ gridCols?: number }> = ({ gridCols = 5, children }) => {
+const TabContents: React.FC<{ gridCols: number }> = ({ gridCols, children }) => {
   const colsClassName = {
     1: 'grid-cols-1',
     2: 'grid-cols-2',

@@ -18,21 +18,30 @@ import { useSortParams } from '../hooks/sort-hooks';
 import usePageName from '../hooks/use-page-name';
 import type { Dev } from '../types';
 
-const repoSubtitle = (languages: RepoAnalysis['languages']) => {
-  if (!languages) return;
+const repoSubtitle = (languages: RepoAnalysis['languages'] = [], defaultBranch?: RepoAnalysis['defaultBranch']) => {
+  if (!languages.length && !defaultBranch) return;
 
   const totalLoc = languages.reduce((acc, lang) => acc + lang.loc, 0);
 
-  return [...languages]
-    .sort((a, b) => b.loc - a.loc)
-    .map(l => (
-      <Flair
-        key={l.lang}
-        flairColor={l.color}
-        title={`${num(l.loc)} lines of code`}
-        label={`${Math.round((l.loc * 100) / totalLoc)}% ${l.lang}`}
-      />
-    ));
+  return (
+    <span className="flex flex-1 justify-between">
+      <span>
+        {
+          [...languages]
+            .sort((a, b) => b.loc - a.loc)
+            .map(l => (
+              <Flair
+                key={l.lang}
+                flairColor={l.color}
+                title={`${num(l.loc)} lines of code`}
+                label={`${Math.round((l.loc * 100) / totalLoc)}% ${l.lang}`}
+              />
+            ))
+        }
+      </span>
+      {defaultBranch ? <span className="italic text-sm text-gray-500">{`Default branch: ${defaultBranch}`}</span> : null}
+    </span>
+  );
 };
 
 type RepoHealthProps = {
@@ -45,7 +54,7 @@ const RepoHealth: React.FC<RepoHealthProps> = ({ repo, isFirst, aggregatedDevs }
   const pageName = usePageName();
   const tabs = useMemo(() => [
     builds(repo.builds),
-    branches(repo.defaultBranch, repo.branches),
+    branches(repo.branches),
     commits(repo, aggregatedDevs),
     prs(repo.prs),
     tests(repo.tests),
@@ -74,7 +83,7 @@ const RepoHealth: React.FC<RepoHealthProps> = ({ repo, isFirst, aggregatedDevs }
     <Card
       title={repo.name}
       titleUrl={repo.url}
-      subtitle={repoSubtitle(repo.languages)}
+      subtitle={repoSubtitle(repo.languages, repo.defaultBranch)}
       onCardClick={onCardClick}
       isExpanded={selectedTab !== null || isFirst || false}
     >

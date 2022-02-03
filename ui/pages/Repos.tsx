@@ -37,7 +37,7 @@ const byTechDebtMoreThanDays = (techDebtMoreThanDays: number) => (repo: RepoAnal
 
 const sorters: SortMap<RepoAnalysis> = {
   'Builds': (a, b) => (a.builds?.count || 0) - (b.builds?.count || 0),
-  'Branches': (a, b) => a.branches.total - b.branches.total,
+  'Branches': (a, b) => a.branches.total.count - b.branches.total.count,
   'Commits': (a, b) => a.commits.count - b.commits.count,
   'Pull requests': (a, b) => a.prs.total - b.prs.total,
   'Tests': (a, b) => (a.tests?.total || 0) - (b.tests?.total || 0),

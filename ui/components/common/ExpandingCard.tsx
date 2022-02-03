@@ -9,8 +9,8 @@ type CardTitleProps = {
 };
 
 const CardTitle: React.FC<CardTitleProps> = ({ title, subtitle, titleUrl }) => (
-  <div>
-    <span className="text-lg font-bold inline-block align-text-bottom">
+  <div className="flex">
+    <span className="text-lg font-bold align-text-bottom">
       {titleUrl ? (
         <a
           href={titleUrl}
@@ -23,12 +23,12 @@ const CardTitle: React.FC<CardTitleProps> = ({ title, subtitle, titleUrl }) => (
         </a>
       ) : title}
     </span>
-    <span
-      className="text-base ml-2 text-gray-600 font-semibold inline-block align-text-bottom"
+    <div
+      className="text-base ml-2 text-gray-600 font-semibold flex-1 align-text-bottom"
       style={{ lineHeight: '27px' }}
     >
       {subtitle}
-    </span>
+    </div>
   </div>
 );
 
