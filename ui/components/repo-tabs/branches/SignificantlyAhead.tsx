@@ -74,6 +74,6 @@ const SignificantlyAheadTabContent: React.FC<{
       }
     </div>
   </>
-) : <p className="text-gray-600 italic">No results found.</p>);
+) : <p className="text-gray-600 italic mt-4">No results found.</p>);
 
 export default SignificantlyAheadTabContent;
