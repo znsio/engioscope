@@ -17,8 +17,7 @@ export default (repoUrl: string, defaultBranch?: string) => (branches: GitBranch
     .filter(b => isWithinFortnight(b.commit.committer.date))
     .sort(sortByCommitDateDesc);
   const inActiveBranches = branches
-    .filter(b => !isWithinFortnight(b.commit.committer.date))
-    .sort(sortByCommitDateAsc);
+    .filter(b => !isWithinFortnight(b.commit.committer.date));
   const abandonedBranches = inActiveBranches
     .filter(b => b.aheadCount > 0 && b.behindCount > 0)
     .sort(sortByCommitDateAsc);

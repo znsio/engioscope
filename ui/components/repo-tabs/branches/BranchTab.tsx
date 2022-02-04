@@ -15,8 +15,8 @@ const BranchTab: React.FC<{
 
   return (
     <button
-      className={`pt-2 pb-4 px-6 mt-2 text-gray-900 break-words rounded-t-lg
-        ${isSelected ? 'bg-gray-100' : 'hover:bg-gray-100'}
+      className={`px-4 py-2 text-gray-900 break-words rounded-lg mr-2
+        ${isSelected ? 'bg-white' : 'hover:bg-white'}
         hover:text-gray-900 focus:text-gray-900 cursor-pointer`}
       onClick={onClick}
     >

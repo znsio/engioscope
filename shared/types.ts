@@ -99,19 +99,19 @@ export type UIBranchStats = {
   limit: number;
 };
 
+type SignificantlyAheadBranchStats = Pick<UIBranchStats, 'count' | 'limit'> & {
+  branches: (UIBranchStats['branches'][0] & {
+    aheadBy: number;
+  })[];
+};
+
 export type UIBranches = {
   total: UIBranchStats;
   active: UIBranchStats;
   abandoned: UIBranchStats;
   deleteCandidates: UIBranchStats;
   possiblyConflicting: UIBranchStats;
-  significantlyAhead: {
-    count: number;
-    limit: number;
-    branches: (UIBranchStats['branches'][0] & {
-      aheadBy: number;
-    })[];
-  };
+  significantlyAhead: SignificantlyAheadBranchStats;
 };
 
 export type UIPullRequests = {

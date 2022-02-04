@@ -21,13 +21,8 @@ const BranchStats: React.FC<{
     component: () => (
       <GenericBranchStats
         branchStats={branchStats.total}
-        notice={(
-          <p className="text-gray-600 italic">
-            Total number of branches in the repository, sorted by
-            {' '}
-            <strong>the one most recently committed to first</strong>
-          </p>
-        )}
+        order="desc"
+        notice="Total number of branches in the repository"
       />
     )
   }, {
@@ -36,13 +31,8 @@ const BranchStats: React.FC<{
     component: () => (
       <GenericBranchStats
         branchStats={branchStats.active}
-        notice={(
-          <p className="text-gray-600 italic">
-            Branches that have got commits in the last 15 days, sorted by
-            {' '}
-            <strong>the one most recently committed to first</strong>
-          </p>
-        )}
+        order="desc"
+        notice="Branches that have got commits in the last 15 days"
       />
     )
   }, {
@@ -51,13 +41,8 @@ const BranchStats: React.FC<{
     component: () => (
       <GenericBranchStats
         branchStats={branchStats.abandoned}
-        notice={(
-          <p className="text-gray-600 italic">
-            Branches that  have commits that are not in the default branch, but haven't got any commits in the last 15 days, sorted by
-            {' '}
-            <strong>the oldest one first</strong>
-          </p>
-        )}
+        order="asc"
+        notice="Branches that  have commits that are not in the default branch, but haven't got any commits in the last 15 days"
       />
     )
   }, {
@@ -66,13 +51,8 @@ const BranchStats: React.FC<{
     component: () => (
       <GenericBranchStats
         branchStats={branchStats.deleteCandidates}
-        notice={(
-          <p className="text-gray-600 italic">
-            Inactive branches which are in-sync with the default branch, sorted by
-            {' '}
-            <strong>the oldest one first</strong>
-          </p>
-        )}
+        order="asc"
+        notice="Inactive branches which are in-sync with the default branch"
       />
     )
   }, {
@@ -81,13 +61,8 @@ const BranchStats: React.FC<{
     component: () => (
       <GenericBranchStats
         branchStats={branchStats.possiblyConflicting}
-        notice={(
-          <p className="text-gray-600 italic">
-            Branches that are significantly out of sync with the default branch, sorted by
-            {' '}
-            <strong>the one most recently committed to first</strong>
-          </p>
-        )}
+        order="desc"
+        notice="Branches that are significantly out of sync with the default branch"
       />
     )
   }, {
@@ -101,30 +76,32 @@ const BranchStats: React.FC<{
   }];
 
   return (
-    <>
+    <TabContents gridCols={1}>
       {
         branchStats.total.count
-          ? tabs.map((tab, index) => (
-            <BranchTab
-              key={tab.label}
-              isSelected={index === selectedTab}
-              onToggleSelect={() => {
-                setSelectedTab(index);
-              }}
-              count={tab.count}
-              label={tab.label}
-            />
-          )) : null
+          ? (
+            <>
+              <div className="grid-cols-1">
+                {
+                  tabs.map((tab, index) => (
+                    <BranchTab
+                      key={tab.label}
+                      isSelected={index === selectedTab}
+                      onToggleSelect={() => {
+                        setSelectedTab(index);
+                      }}
+                      count={tab.count}
+                      label={tab.label}
+                    />
+                  ))
+                }
+              </div>
+              { tabs[selectedTab].component() }
+            </>
+          )
+          : <AlertMessage message="No branches in this repo" />
       }
-
-      <TabContents gridCols={1}>
-        {
-          branchStats.total.count
-            ? tabs[selectedTab].component()
-            : <AlertMessage message="No branches in this repo" />
-        }
-      </TabContents>
-    </>
+    </TabContents>
   );
 };
 

@@ -39,7 +39,18 @@ const repoSubtitle = (languages: RepoAnalysis['languages'] = [], defaultBranch?:
             ))
         }
       </span>
-      {defaultBranch ? <span className="italic text-sm text-gray-500">{`Default branch: ${defaultBranch}`}</span> : null}
+      {
+        defaultBranch
+          ? (
+            <span className="italic text-sm text-gray-500">
+              Default branch
+              {' '}
+              <code className="border-gray-300 border-2 rounded-md px-1 py-0 bg-gray-50">
+                {defaultBranch}
+              </code>
+            </span>
+          ) : null
+      }
     </span>
   );
 };
