@@ -5,8 +5,9 @@ const BranchTab: React.FC<{
   onToggleSelect: () => void;
   count: string;
   label: string;
+  tooltip: string;
 }> = ({
-  isSelected, onToggleSelect, count, label
+  isSelected, onToggleSelect, count, label, tooltip
 }) => {
   const onClick = useCallback(e => {
     e.stopPropagation();
@@ -19,6 +20,8 @@ const BranchTab: React.FC<{
         ${isSelected ? 'bg-white' : 'hover:bg-white'}
         hover:text-gray-900 focus:text-gray-900 cursor-pointer`}
       onClick={onClick}
+      data-tip={tooltip || ''}
+      data-html
     >
       <div className={`text-base font-semibold -mb-1 ${isSelected ? 'text-black' : 'text-gray-600'} `}>
         {count}

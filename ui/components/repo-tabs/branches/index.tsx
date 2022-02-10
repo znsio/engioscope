@@ -2,72 +2,73 @@ import React, { useState } from 'react';
 import type { RepoAnalysis } from '../../../../shared/types';
 import type { Tab } from '../Tabs';
 import { num } from '../../../helpers/utils';
-import GenericBranchStats from '../branches/GenericBranchStats';
+import BranchStats from './BranchStats';
 import SignificantlyAheadTabContent from '../branches/SignificantlyAhead';
 import BranchTab from '../branches/BranchTab';
 import TabContents from '../TabContents';
 import AlertMessage from '../../common/AlertMessage';
 
-const BranchStats: React.FC<{
+const Branches: React.FC<{
   branchStats: RepoAnalysis['branches'];
+  defaultBranch: RepoAnalysis['defaultBranch'];
 }> = ({
-  branchStats
+  branchStats,
+  defaultBranch
 }) => {
   const [selectedTab, setSelectedTab] = useState(0);
+  const defaultBranchLabel = `${defaultBranch
+    ? `<code class="border-gray-300 border-2 rounded-md px-1 py-0 italic">${defaultBranch}</code>` : 'the default branch'}`;
 
   const tabs = [{
     label: 'Total',
     count: num(branchStats.total.count),
+    tooltip: 'Total number of branches in the repository',
     component: () => (
-      <GenericBranchStats
+      <BranchStats
         branchStats={branchStats.total}
-        order="desc"
-        notice="Total number of branches in the repository"
       />
     )
   }, {
     label: 'Active',
     count: num(branchStats.active.count),
+    tooltip: 'Branches that have got commits in the last 15 days',
     component: () => (
-      <GenericBranchStats
+      <BranchStats
         branchStats={branchStats.active}
-        order="desc"
-        notice="Branches that have got commits in the last 15 days"
       />
     )
   }, {
     label: 'Abandoned',
     count: num(branchStats.abandoned.count),
+    tooltip: `Branches that  have commits that are not in ${defaultBranchLabel}, but haven't got any commits in the last 15 days`,
     component: () => (
-      <GenericBranchStats
+      <BranchStats
         branchStats={branchStats.abandoned}
-        order="asc"
-        notice="Branches that  have commits that are not in the default branch, but haven't got any commits in the last 15 days"
       />
     )
   }, {
     label: 'Delete candidates',
     count: num(branchStats.deleteCandidates.count),
+    tooltip: `Inactive branches which are in-sync with ${defaultBranchLabel}`,
     component: () => (
-      <GenericBranchStats
+      <BranchStats
         branchStats={branchStats.deleteCandidates}
-        order="asc"
-        notice="Inactive branches which are in-sync with the default branch"
       />
     )
   }, {
     label: 'Possibly conflicting',
     count: num(branchStats.possiblyConflicting.count),
+    tooltip: `Branches that are significantly out of sync with ${defaultBranchLabel}`,
     component: () => (
-      <GenericBranchStats
+      <BranchStats
         branchStats={branchStats.possiblyConflicting}
-        order="desc"
-        notice="Branches that are significantly out of sync with the default branch"
       />
     )
   }, {
     label: 'Significantly ahead',
     count: num(branchStats.significantlyAhead.count),
+    tooltip: `The following ${branchStats.significantlyAhead.count > 1 ? 'branches are' : 'branch is'} 
+      significantly ahead of ${defaultBranchLabel}`,
     component: () => (
       <SignificantlyAheadTabContent
         significantlyAheadBranchStats={branchStats.significantlyAhead}
@@ -92,6 +93,7 @@ const BranchStats: React.FC<{
                       }}
                       count={tab.count}
                       label={tab.label}
+                      tooltip={tab.tooltip}
                     />
                   ))
                 }
@@ -105,8 +107,8 @@ const BranchStats: React.FC<{
   );
 };
 
-export default (branches: RepoAnalysis['branches']): Tab => ({
+export default (branches: RepoAnalysis['branches'], defaultBranch: RepoAnalysis['defaultBranch']): Tab => ({
   title: 'Branches',
   count: branches.total.count,
-  content: () => (<BranchStats branchStats={branches} />)
+  content: () => (<Branches branchStats={branches} defaultBranch={defaultBranch} />)
 });

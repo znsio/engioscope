@@ -2,9 +2,9 @@ import type { UIBranches } from '../../../shared/types';
 import type { GitBranchStats } from '../types-azure';
 import { isWithinFortnight } from '../../utils';
 
-const BRANCH_PAGE_LIMIT = 20;
+const branchPageLimit = 20;
 
-const pageLimitBranches = (branches: GitBranchStats[]) => branches.slice(0, BRANCH_PAGE_LIMIT);
+const pageLimitBranches = (branches: GitBranchStats[]) => branches.slice(0, branchPageLimit);
 const sortByCommitDate = (asc: boolean) => (a: GitBranchStats, b: GitBranchStats) => (
   (asc ? 1 : -1) * (a.commit.committer.date.getTime() - b.commit.committer.date.getTime())
 );
@@ -31,47 +31,43 @@ export default (repoUrl: string, defaultBranch?: string) => (branches: GitBranch
     .filter(b => b.aheadCount >= 20)
     .sort((a, b) => b.aheadCount - a.aheadCount);
 
-  const mapBranch = (
-    branch: GitBranchStats,
-    branchUrl = `${repoUrl}/?_a=contents&targetVersion=GB${encodeURIComponent(branch.name)}`
+  const getBranchWithLink = (linkType: 'history' | 'contents') => (
+    branch: GitBranchStats
   ) => ({
     name: branch.name,
-    url: branchUrl,
+    url: `${repoUrl}/?_a=${linkType}&targetVersion=GB${encodeURIComponent(branch.name)}`,
     lastCommitDate: branch.commit.committer.date
   });
 
   return {
     total: {
       count: allBranches.length,
-      limit: BRANCH_PAGE_LIMIT,
-      branches: pageLimitBranches(allBranches).map(branch => mapBranch(branch))
+      limit: branchPageLimit,
+      branches: pageLimitBranches(allBranches).map(getBranchWithLink('contents'))
     },
     active: {
       count: activeBranches.length,
-      limit: BRANCH_PAGE_LIMIT,
-      branches: pageLimitBranches(activeBranches).map(branch => mapBranch(branch))
+      limit: branchPageLimit,
+      branches: pageLimitBranches(activeBranches).map(getBranchWithLink('contents'))
     },
     abandoned: {
       count: abandonedBranches.length,
-      limit: BRANCH_PAGE_LIMIT,
-      branches: pageLimitBranches(abandonedBranches).map(branch => mapBranch(
-        branch,
-        `${repoUrl}/?_a=history&targetVersion=GB${encodeURIComponent(branch.name)}`
-      ))
+      limit: branchPageLimit,
+      branches: pageLimitBranches(abandonedBranches).map(getBranchWithLink('history'))
     },
     deleteCandidates: {
       count: deleteCandidates.length,
-      limit: BRANCH_PAGE_LIMIT,
-      branches: pageLimitBranches(deleteCandidates).map(branch => mapBranch(branch))
+      limit: branchPageLimit,
+      branches: pageLimitBranches(deleteCandidates).map(getBranchWithLink('contents'))
     },
     possiblyConflicting: {
       count: possiblyConflicting.length,
-      limit: BRANCH_PAGE_LIMIT,
-      branches: pageLimitBranches(possiblyConflicting).map(branch => mapBranch(branch))
+      limit: branchPageLimit,
+      branches: pageLimitBranches(possiblyConflicting).map(getBranchWithLink('contents'))
     },
     significantlyAhead: {
       count: significantlyAheadBranches.length,
-      limit: BRANCH_PAGE_LIMIT,
+      limit: branchPageLimit,
       branches: pageLimitBranches(significantlyAheadBranches).map(b => ({
         name: b.name,
         // TODO: Handle the default branch being undefined case better.

@@ -42,7 +42,7 @@ const repoSubtitle = (languages: RepoAnalysis['languages'] = [], defaultBranch?:
       {
         defaultBranch
           ? (
-            <span className="italic text-sm text-gray-500">
+            <span className="italic text-sm text-gray-500" style={{ lineHeight: 'inherit' }}>
               Default branch
               {' '}
               <code className="border-gray-300 border-2 rounded-md px-1 py-0 bg-gray-50">
@@ -65,7 +65,7 @@ const RepoHealth: React.FC<RepoHealthProps> = ({ repo, isFirst, aggregatedDevs }
   const pageName = usePageName();
   const tabs = useMemo(() => [
     builds(repo.builds),
-    branches(repo.branches),
+    branches(repo.branches, repo.defaultBranch),
     commits(repo, aggregatedDevs),
     prs(repo.prs),
     tests(repo.tests),
