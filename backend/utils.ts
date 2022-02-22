@@ -25,6 +25,8 @@ export const isMaster = (branchName: string) => [
   'refs/heads/master', 'refs/heads/main'
 ].includes(branchName);
 
+export const normalizeBranchName = (branchName: string) => branchName.replace('refs/heads/', '');
+
 export const exists = <T>(x: T | undefined | null): x is T => (
   x !== null && x !== undefined
 );

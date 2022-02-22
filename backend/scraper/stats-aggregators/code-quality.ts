@@ -33,7 +33,7 @@ export const requiredMetrics = [
   'files'
 ];
 
-type AggregagedCodeQuality = {
+type AggregatedCodeQuality = {
   codeQuality: UICodeQuality;
   languages?: {lang: string; loc: number}[];
 };
@@ -42,7 +42,7 @@ const isMeasureName = (name: string) => (measure: Measure) => (
   measure.metric === name
 );
 
-const formatLoc = (loc?: string): AggregagedCodeQuality['languages'] => {
+const formatLoc = (loc?: string): AggregatedCodeQuality['languages'] => {
   if (!loc) return;
   return loc
     .split(';')
@@ -115,7 +115,7 @@ const sonarAnalysisGetter = (sonarAnalysis: NonNullable<SonarAnalysisByRepo>[num
   };
 };
 
-export default (sonarAnalyses: SonarAnalysisByRepo): AggregagedCodeQuality => {
+export default (sonarAnalyses: SonarAnalysisByRepo): AggregatedCodeQuality => {
   if (!sonarAnalyses) return { codeQuality: null };
 
   return {

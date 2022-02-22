@@ -32,8 +32,7 @@ export default (config: ParsedConfig) => {
     getTestRuns, getTestCoverage, getReleases, getPolicyConfigurations,
     getProjectWorkItemIdsForQuery
   } = azure(config);
-  const codeQualityByRepoName = sonar(config);
-
+  const codeQualityByRepo = sonar(config);
   return async (
     collection: ParsedCollection,
     projectConfig: ParsedProjectConfig,
@@ -85,7 +84,7 @@ export default (config: ParsedConfig) => {
       ] = await Promise.all([
         branchStats.then(aggregateBranches(r.webUrl, r.defaultBranch)),
         getTestsByRepoId(r.id),
-        codeQualityByRepoName(r.name).then(aggregateCodeQuality),
+        forProject(codeQualityByRepo)(r.name, r.defaultBranch).then(aggregateCodeQuality),
         forProject(getCommits)(r.id).then(aggregateCommits)
       ]);
 
