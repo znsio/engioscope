@@ -70,7 +70,8 @@ export const aggregateReleasesIntoPipelines = (releases: Release[]) => {
         .map(env => ({
           env: env.name,
           rank: env.rank,
-          date: last(env.deploySteps).lastModifiedOn,
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          date: last(env.deploySteps)!.lastModifiedOn,
           state: env.status
         }))
         .filter(exists)
@@ -117,7 +118,8 @@ const didAttemptGoAheadUsing = (
   if (!lastMatchingStage) return always(true);
 
   return (attempt: (typeof pipeline)['attempts'][number]) => {
-    const attemptProgressionMaxRank = last(attempt.progression).rank;
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const attemptProgressionMaxRank = last(attempt.progression)!.rank;
     return attemptProgressionMaxRank > lastMatchingStage.rank;
   };
 };

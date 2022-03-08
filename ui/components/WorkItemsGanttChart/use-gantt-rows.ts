@@ -132,7 +132,8 @@ const constructTree = (
   const byWorkItemType = groupByWorkItemType(workItemById, workItemType);
 
   const buildForAncestor = (ancestors: WithoutChildren<WorkItemNode>[]): WorkItemNode['children'] => {
-    const parent = last(ancestors);
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const parent = last(ancestors)!;
 
     const groupedByWorkItemType = byWorkItemType(
       ancestors, childIdsOf(wid(parent))

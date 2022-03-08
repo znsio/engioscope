@@ -130,7 +130,8 @@ const WIPTrendGraph: React.FC<WIPTrendGraphProps> = ({
 
     const items = dataByDay.map(({ groupName, witId, workItemPoints }) => ({
       label: groupName === noGroup ? workItemType(witId).name[1] : groupName,
-      value: num(last(workItemPoints).workItems.length),
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      value: num(last(workItemPoints)!.workItems.length),
       iconUrl: workItemType(witId).icon,
       color: lineColor({ groupName, witId }),
       isChecked: isChecked(witId + groupName),
@@ -142,7 +143,8 @@ const WIPTrendGraph: React.FC<WIPTrendGraphProps> = ({
         num(
           dataByDay
             .filter(item => item.witId === witId)
-            .map(item => last(item.workItemPoints).workItems)
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            .map(item => last(item.workItemPoints)!.workItems)
             .flat()
             .length
         )
