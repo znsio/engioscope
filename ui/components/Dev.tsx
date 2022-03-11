@@ -1,6 +1,6 @@
 import { add } from 'rambda';
 import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import type { Dev } from '../types';
 import Changes from './commits/Changes';
 import CommitTimeline from './commits/CommitTimeline';
@@ -9,7 +9,7 @@ import { ProfilePic } from './common/ProfilePic';
 
 const Developer: React.FC<{ dev: Dev; isFirst: boolean }> = ({ dev, isFirst }) => {
   const [isExpanded, setIsExpanded] = useState<boolean>(isFirst);
-  const history = useHistory();
+  const location = useLocation();
   const allCommits = dev.repos.flatMap(r => Object.values(r.byDate));
   const commitsCount = allCommits.reduce(add, 0);
 
@@ -79,7 +79,7 @@ const Developer: React.FC<{ dev: Dev; isFirst: boolean }> = ({ dev, isFirst }) =
                   <tr key={repo.name}>
                     <td className="px-6 py-4 text-left w-5/12">
                       <Link
-                        to={history.location.pathname.replace('/devs', `/repos?search="${repo.name}"`)}
+                        to={location.pathname.replace('/devs', `/repos?search="${repo.name}"`)}
                         className="link-text"
                       >
                         {repo.name}

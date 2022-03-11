@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useProjectDetails } from '../hooks/project-details-hooks';
 import usePageName from '../hooks/use-page-name';
 import type { Tab } from '../types';
@@ -10,10 +10,10 @@ type NavItem = {
 };
 
 const NavBar: React.FC = () => {
-  const history = useHistory();
+  const location = useLocation();
   const pageName = usePageName();
   const projectDetails = useProjectDetails();
-  const pathParts = history.location.pathname.split('/');
+  const pathParts = location.pathname.split('/');
   const selectedTab = pathParts[pathParts.length - 1] as Tab;
 
   const newRoute = useCallback(
@@ -39,7 +39,7 @@ const NavBar: React.FC = () => {
         {navItems.map(({ key, name }) => (
           <Link
             key={key}
-            to={() => newRoute(key)}
+            to={newRoute(key)}
             className={`px-3 mr-2 h-10 rounded text-lg
             font-medium leading-4 ${selectedTab === key ? 'bg-gray-800 text-gray-200'
             : 'border-2 border-transparent hover:border-gray-800 text-gray-800 cursor-pointer'}

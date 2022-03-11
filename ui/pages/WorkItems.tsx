@@ -42,7 +42,8 @@ const useRevisionsForCollection = () => {
 
     if (!needToFetch.length) return;
 
-    workItemRevisions(collection, [...new Set(needToFetch)]).then(revisions => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    workItemRevisions(collection!, [...new Set(needToFetch)]).then(revisions => {
       setRevisions(rs => needToFetch.reduce((rs, id) => ({ ...rs, [id]: revisions[id] }), rs));
     });
   }, [collection, revisions]);

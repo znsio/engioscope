@@ -1,9 +1,5 @@
 import React, { useEffect } from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route
-} from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { QueryParamProvider } from 'use-query-params';
 import ReactTooltip from 'react-tooltip';
 import Project from './pages/Project';
@@ -24,32 +20,24 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <ProjectDetailsProvider>
-      <SortContextProvider>
-        <div className="mb-32 overflow-y-auto transition duration-500 ease-in-out">
-          <ReactTooltip />
-          <Router>
+    <BrowserRouter>
+      <ProjectDetailsProvider>
+        <SortContextProvider>
+          <div className="mb-32 overflow-y-auto transition duration-500 ease-in-out">
+            <ReactTooltip />
             <QueryParamProvider ReactRouterRoute={Route}>
               <RecordAnalytics />
-              <Switch>
-                <Route path="/analytics">
-                  <Analytics />
-                </Route>
-                <Route path="/summary">
-                  <Summary />
-                </Route>
-                <Route path="/:collection/:project">
-                  <Project />
-                </Route>
-                <Route path="/">
-                  <Collection />
-                </Route>
-              </Switch>
+              <Routes>
+                <Route path="/analytics" element={<Analytics />} />
+                <Route path="/summary" element={<Summary />} />
+                <Route path="/:collection/:project" element={<Project />} />
+                <Route path="/" element={<Collection />} />
+              </Routes>
             </QueryParamProvider>
-          </Router>
-        </div>
-      </SortContextProvider>
-    </ProjectDetailsProvider>
+          </div>
+        </SortContextProvider>
+      </ProjectDetailsProvider>
+    </BrowserRouter>
   );
 };
 

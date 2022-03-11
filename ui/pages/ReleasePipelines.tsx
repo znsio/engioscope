@@ -55,7 +55,8 @@ const useReleaseDefinitions = () => {
 
     setReleaseDefinitionCache(cache => needToFetch.reduce((d, id) => ({ ...d, [id]: 'loading' }), cache));
 
-    releaseDefinitions(collection, project, [...new Set(needToFetch)])
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    releaseDefinitions(collection!, project!, [...new Set(needToFetch)])
       .then(revisions => {
         setReleaseDefinitionCache(cache => ({ ...cache, ...revisions }));
       })

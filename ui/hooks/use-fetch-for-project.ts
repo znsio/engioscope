@@ -9,7 +9,8 @@ export default <T extends UIProjectAnalysis>(fetcher: (collectionName: string, p
   const setProjectDetails = useSetProjectDetails();
 
   useEffect(() => {
-    fetcher(collection, project).then(results => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    fetcher(collection!, project!).then(results => {
       setFetchResult(results);
       setProjectDetails(results);
     });

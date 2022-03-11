@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route, useParams } from 'react-router-dom';
+import { Routes, Route, useParams } from 'react-router-dom';
 import NavBar from '../components/NavBar';
 import Repos from './Repos';
 import ReleasePipelines from './ReleasePipelines';
@@ -59,23 +59,13 @@ const Project: React.FC = () => {
           </div>
         </div>
 
-        <Switch>
-          <Route path="/:collection/:project/repos">
-            <Repos />
-          </Route>
-          <Route path="/:collection/:project/release-pipelines">
-            <ReleasePipelines />
-          </Route>
-          <Route path="/:collection/:project/devs">
-            <Devs />
-          </Route>
-          <Route path="/:collection/:project/workitems">
-            <WorkItems />
-          </Route>
-          <Route path="/:collection/:project/">
-            <Overview />
-          </Route>
-        </Switch>
+        <Routes>
+          <Route path="/:collection/:project/repos" element={<Repos />} />
+          <Route path="/:collection/:project/release-pipelines" element={<ReleasePipelines />} />
+          <Route path="/:collection/:project/devs" element={<Devs />} />
+          <Route path="/:collection/:project/workitems" element={<WorkItems />} />
+          <Route path="/:collection/:project/" element={<Overview />} />
+        </Routes>
       </div>
     </div>
   );

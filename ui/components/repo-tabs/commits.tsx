@@ -1,6 +1,6 @@
 import React from 'react';
 import { add } from 'rambda';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import type { RepoAnalysis } from '../../../shared/types';
 import AlertMessage from '../common/AlertMessage';
 import type { Tab } from './Tabs';
@@ -11,6 +11,7 @@ import Changes from '../commits/Changes';
 import type { Dev } from '../../types';
 
 export default (repo: RepoAnalysis, aggregatedDevs: Record<string, Dev>): Tab => {
+  const location = useLocation();
   const { commits } = repo;
   const max = Math.max(...Object.values(commits.byDev).flatMap(d => Object.values(d.byDate)));
   const subtitle = (devName: string) => {
@@ -43,8 +44,7 @@ export default (repo: RepoAnalysis, aggregatedDevs: Record<string, Dev>): Tab =>
                 </thead>
                 <tbody className="text-base text-gray-600 bg-white divide-y divide-gray-200">
                   {commits.byDev.map(commitsByDev => {
-                    const history = useHistory();
-                    const developerUrl = () => history.location.pathname.replace('/repos', `/devs?search="${commitsByDev.name}"`);
+                    const developerUrl = location.pathname.replace('/repos', `/devs?search="${commitsByDev.name}"`);
 
                     return (
                       <tr key={commitsByDev.name}>

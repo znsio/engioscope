@@ -1,7 +1,7 @@
 import React, {
   useCallback, useEffect, useMemo, useState
 } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import type { RepoAnalysis } from '../../shared/types';
 import { num } from '../helpers/utils';
 import Card from './common/ExpandingCard';
@@ -88,8 +88,8 @@ const RepoHealth: React.FC<RepoHealthProps> = ({ repo, isFirst, aggregatedDevs }
     setSelectedTab(!selectedTab ? tabs[0] : null);
   }, [selectedTab, tabs]);
 
-  const history = useHistory();
-  const pipelinesUrl = () => history.location.pathname.replace('/repos', `/release-pipelines?search=repo:"${repo.name}"`);
+  const location = useLocation();
+  const pipelinesUrl = location.pathname.replace('/repos', `/release-pipelines?search=repo:"${repo.name}"`);
 
   return (
     <Card
