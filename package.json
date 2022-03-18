@@ -36,7 +36,7 @@
     "chalk": "^4.1.2",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.5",
-    "debug": "^4.3.1",
+    "debug": "^4.3.4",
     "express": "^4.17.1",
     "express-promise-router": "^4.1.0",
     "express-rate-limit": "^6.3.0",
