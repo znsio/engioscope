@@ -98,7 +98,7 @@
     "@types/tar": "^6.1.1",
     "@types/ua-parser-js": "^0.7.36",
     "@types/yaml": "^1.9.7",
-    "@types/yargs": "^17.0.2",
+    "@types/yargs": "^17.0.10",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.15.0",
     "@vitejs/plugin-legacy": "^1.5.1",
