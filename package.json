@@ -36,7 +36,7 @@
     "chalk": "^4.1.2",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.5",
-    "debug": "^4.3.1",
+    "debug": "^4.3.4",
     "express": "^4.17.1",
     "express-promise-router": "^4.1.0",
     "express-rate-limit": "^6.3.0",
@@ -54,7 +54,7 @@
     "tar": "^6.1.11",
     "ua-parser-js": "^1.0.2",
     "yaml": "^1.10.2",
-    "yargs": "^17.0.1"
+    "yargs": "^17.4.0"
   },
   "browserslist": {
     "production": [
@@ -98,7 +98,7 @@
     "@types/tar": "^6.1.1",
     "@types/ua-parser-js": "^0.7.36",
     "@types/yaml": "^1.9.7",
-    "@types/yargs": "^17.0.2",
+    "@types/yargs": "^17.0.10",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.15.0",
     "@vitejs/plugin-legacy": "^1.5.1",
