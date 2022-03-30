@@ -75,7 +75,7 @@
     "@babel/preset-typescript": "^7.14.5",
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^12.1.4",
-    "@testing-library/user-event": "^13.1.9",
+    "@testing-library/user-event": "^14.0.0",
     "@types/compression": "^1.7.1",
     "@types/cookie-parser": "^1.4.2",
     "@types/debug": "^4.1.5",
@@ -101,7 +101,7 @@
     "@types/yargs": "^17.0.10",
     "@typescript-eslint/eslint-plugin": "^5.17.0",
     "@typescript-eslint/parser": "^5.17.0",
-    "@vitejs/plugin-legacy": "^1.5.1",
+    "@vitejs/plugin-legacy": "^1.8.0",
     "@vitejs/plugin-react-refresh": "^1.3.4",
     "core-js": "^3.15.2",
     "eslint": "^8.12.0",
@@ -129,7 +129,7 @@
     "ts-node": "^10.0.0",
     "typescript": "^4.6.3",
     "use-query-params": "^1.2.3",
-    "vite": "^2.3.8"
+    "vite": "^2.9.0"
   },
   "repository": {
     "type": "git",
