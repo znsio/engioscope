@@ -1,6 +1,6 @@
 {
   "name": "engioscope",
-  "version": "0.1.110",
+  "version": "0.1.111",
   "scripts": {
     "watch:tailwind": "tailwind build -i ui/tailwind.css -o ui/tailwind.output.css --watch",
     "start:vite": "vite --open",
@@ -70,7 +70,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.17.10",
-    "@babel/preset-env": "^7.10.4",
+    "@babel/preset-env": "^7.17.10",
     "@babel/preset-react": "^7.14.5",
     "@babel/preset-typescript": "^7.14.5",
     "@testing-library/jest-dom": "^5.16.4",
