@@ -92,7 +92,7 @@
     "@types/node-fetch": "^2.5.12",
     "@types/pluralize": "^0.0.29",
     "@types/qs": "^6.9.6",
-    "@types/react": "^18.0.10",
+    "@types/react": "^18.0.12",
     "@types/react-dom": "^18.0.5",
     "@types/react-modal": "^3.12.1",
     "@types/react-router-dom": "^5.1.5",
