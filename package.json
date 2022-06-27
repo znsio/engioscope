@@ -50,7 +50,7 @@
     "p-limit": "^3.1.0",
     "pluralize": "^8.0.0",
     "pretty-ms": "^7.0.1",
-    "qs": "^6.10.5",
+    "qs": "^6.11.0",
     "rambda": "^7.1.4",
     "react-hotkeys-hook": "^3.4.6",
     "split2": "^4.1.0",
