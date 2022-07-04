@@ -43,7 +43,7 @@
     "glob": "^8.0.3",
     "html-entities": "^2.3.3",
     "md5": "^2.3.0",
-    "mongoose": "^6.4.0",
+    "mongoose": "^6.4.2",
     "morgan": "^1.10.0",
     "ms": "^2.1.2",
     "node-fetch": "^2.6.7",
