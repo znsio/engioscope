@@ -39,7 +39,7 @@
     "debug": "^4.3.4",
     "express": "^4.18.1",
     "express-promise-router": "^4.1.0",
-    "express-rate-limit": "^6.4.0",
+    "express-rate-limit": "^6.5.1",
     "glob": "^8.0.3",
     "html-entities": "^2.3.3",
     "md5": "^2.3.0",
