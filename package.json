@@ -54,7 +54,7 @@
     "node-html-parser": "^5.3.3",
     "p-limit": "^4.0.0",
     "pluralize": "^8.0.0",
-    "pretty-ms": "^7.0.1",
+    "pretty-ms": "^8.0.0",
     "qs": "^6.11.0",
     "rambda": "^7.1.4",
     "react-hotkeys-hook": "^3.4.7",
