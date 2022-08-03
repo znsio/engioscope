@@ -56,7 +56,7 @@
     "pluralize": "^8.0.0",
     "pretty-ms": "^8.0.0",
     "qs": "^6.11.0",
-    "rambda": "^7.1.4",
+    "rambda": "^7.2.0",
     "react-hotkeys-hook": "^3.4.7",
     "split2": "^4.1.0",
     "tar": "^6.1.11",
