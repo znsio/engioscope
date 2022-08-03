@@ -95,7 +95,7 @@
     "@types/morgan": "^1.9.3",
     "@types/ms": "^0.7.31",
     "@types/node": "^18.6.3",
-    "@types/node-fetch": "^2.5.12",
+    "@types/node-fetch": "^2.6.2",
     "@types/pluralize": "^0.0.29",
     "@types/qs": "^6.9.6",
     "@types/react": "^18.0.15",
